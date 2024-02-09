@@ -1,0 +1,153 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>Vexah S.A.S - Validador de Hermaientas</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 col-md-3">
+        </div>
+        <div class="col-sm-3 col-md-3">
+            <img src="assets/blankin_plug.png" class="img-fluid">
+        </div>
+        <div class="col-sm-3 col-md-3">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Blanking Plug</mat-card-title>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <mat-card-subtitle>Seleccione la familiar que desea validar</mat-card-subtitle>
+                    <mat-chip-listbox aria-label="Fish selection">
+                        <mat-chip-option value="TWO_THREE_EIGHTHS" (selectionChange)="optionSelectedFamily($event)">2
+                            3/8</mat-chip-option>
+                        <mat-chip-option value="TWO_SEVENT_EIGHTHS" (selectionChange)="optionSelectedFamily($event)">2
+                            7/8</mat-chip-option>
+                        <mat-chip-option value="THREE_A_HALFT" (selectionChange)="optionSelectedFamily($event)">3
+                            1/2</mat-chip-option>
+                    </mat-chip-listbox>
+                </mat-card-content>
+
+                @if (TWO_THREE_EIGHTHS) {
+                <mat-card-content>
+                    <mat-card-subtitle>{{SUBTILE}}</mat-card-subtitle>
+                    <mat-chip-listbox aria-label="Fish selection">
+                        <mat-chip-option (selectionChange)="optionSelectedReference()">1.81</mat-chip-option>
+                        <mat-chip-option (selectionChange)="optionSelectedReference()">1.87</mat-chip-option>
+                    </mat-chip-listbox>
+                </mat-card-content>
+                }
+
+                @if (TWO_SEVENT_EIGHTHS) {
+                <mat-card-content>
+                    <mat-card-subtitle>{{SUBTILE}}</mat-card-subtitle>
+                    <mat-chip-listbox aria-label="Fish selection">
+                        <mat-chip-option (selectionChange)="optionSelectedReference()">2.25</mat-chip-option>
+                        <mat-chip-option (selectionChange)="optionSelectedReference()">2.31</mat-chip-option>
+                    </mat-chip-listbox>
+                </mat-card-content>
+                }
+
+                @if (THREE_A_HALFT) {
+                <mat-card-content>
+                    <mat-card-subtitle>{{SUBTILE}}</mat-card-subtitle>
+                    <mat-chip-listbox aria-label="Fish selection">
+                        <mat-chip-option (selectionChange)="optionSelectedReference()">2.56</mat-chip-option>
+                        <mat-chip-option (selectionChange)="optionSelectedReference()">2.57</mat-chip-option>
+                        <mat-chip-option (selectionChange)="optionSelectedReference()">2.81</mat-chip-option>
+                    </mat-chip-listbox>
+                </mat-card-content>
+                }
+                @if (SHOW_FORM) {
+                <form [formGroup]="formTools" (ngSubmit)="submitForm()">
+                    <mat-card-content style="margin-top: 1rem;">
+                        <mat-form-field class="mat-form-field">
+                            <mat-label>Fishing neck</mat-label>
+                            <input matInput formControlName="fishingNeck">
+                        </mat-form-field>
+                        @if (formTools.get('fishingNeck')?.invalid && formTools.get('fishingNeck')?.touched) {
+                        @if (formTools.get('fishingNeck')?.errors?.['required']) {
+                        <mat-error>El campo es requerido</mat-error>
+                        }
+                        @if (formTools.get('fishingNeck')?.errors?.['rangeDecimals']) {
+                        <mat-error>El valor no está en el rango permitido</mat-error>
+                        }
+                        }
+                    </mat-card-content>
+
+                    <mat-card-content>
+                        <mat-form-field class="mat-form-field">
+                            <mat-label>NO-GO. OD</mat-label>
+                            <input matInput formControlName="noGo">
+                        </mat-form-field>
+                        @if (formTools.get('noGo')?.invalid && formTools.get('noGo')?.touched) {
+                        @if (formTools.get('noGo')?.errors?.['required']) {
+                        <mat-error>El campo es requerido</mat-error>
+                        }
+                        @if (formTools.get('noGo')?.errors?.['rangeDecimals']) {
+                        <mat-error>El valor no está en el rango permitido</mat-error>
+                        }
+                        }
+                    </mat-card-content>
+
+                    <mat-card-content>
+                        <mat-form-field class="mat-form-field">
+                            <mat-label># O-ring Lock Ring Segment</mat-label>
+                            <input matInput formControlName="lockRingSegment">
+                        </mat-form-field>
+                        @if (formTools.get('lockRingSegment')?.invalid && formTools.get('lockRingSegment')?.touched) {
+                        @if (formTools.get('lockRingSegment')?.errors?.['required']) {
+                        <mat-error>El campo es requerido</mat-error>
+                        }
+                        @if (formTools.get('lockRingSegment')?.errors?.['exactValue']) {
+                        <mat-error>El valor debe ser exactamente 014</mat-error>
+                        }
+                        }
+                    </mat-card-content>
+
+                    <mat-card-content>
+                        <mat-form-field class="mat-form-field">
+                            <mat-label># O-ring Equalizing Mandrel (2)</mat-label>
+                            <input matInput formControlName="equalizingMandrel">
+                        </mat-form-field>
+                        @if (formTools.get('equalizingMandrel')?.invalid &&
+                        formTools.get('equalizingMandrel')?.touched) {
+                        @if (formTools.get('equalizingMandrel')?.errors?.['required']) {
+                        <mat-error>El campo es requerido</mat-error>
+                        }
+                        @if (formTools.get('equalizingMandrel')?.errors?.['exactValue']) {
+                        <mat-error>El valor debe ser exactamente 011</mat-error>
+                        }
+                        }
+                    </mat-card-content>
+
+                    <mat-card-content>
+                        <mat-form-field class="mat-form-field">
+                            <mat-label># O-ring Plug</mat-label>
+                            <input matInput formControlName="ringPlug">
+                        </mat-form-field>
+                        @if (formTools.get('ringPlug')?.invalid &&
+                        formTools.get('ringPlug')?.touched) {
+                        @if (formTools.get('ringPlug')?.errors?.['required']) {
+                        <mat-error>El campo es requerido</mat-error>
+                        }
+                        @if (formTools.get('ringPlug')?.errors?.['exactValue']) {
+                        <mat-error>El valor debe ser exactamente 011</mat-error>
+                        }
+                        }
+
+                        <button mat-raised-button color="primary" class="float-left" [disabled]="formTools.invalid"
+                            style="margin-bottom: 1rem">Validar</button>
+                        <a mat-raised-button color="warn" class="float-right"
+                            style="margin-bottom: 1rem" (click)="clearForm()">Borrar</a>
+                    </mat-card-content>
+                </form>
+                }
+            </mat-card>
+
+        </div>
+        <div class="col-sm-3 col-md-3">
+        </div>
+    </div>
+</div>
